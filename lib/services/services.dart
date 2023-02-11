@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cinematix/models/models.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cinematix/extensions/extensions.dart';

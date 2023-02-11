@@ -14,4 +14,20 @@ extension FirebaseUserExtension on User {
         selectedLanguage: selectedLanguage,
         balance: balance,
       );
+
+  Future<UserAccount> fromFirestore(String id) async {
+    String jsonResult = await UserAccountServices.getUser(id);
+    Map<String, dynamic> object = json.decode(jsonResult);
+
+    return UserAccount(
+      id,
+      object['email'],
+      name: object['name'],
+      profilePicture: object['profilePicture'],
+      selectedGenre:
+          (object['selectedGenre'] as List).map((e) => e.toString()).toList(),
+      selectedLanguage: object['selectedLanguage'],
+      balance: object['balance'],
+    );
+  }
 }

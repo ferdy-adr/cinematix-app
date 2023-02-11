@@ -16,8 +16,26 @@ class AuthServices {
 
       return SignInSignUpResult(user: user);
     } catch (e) {
-      return SignInSignUpResult(message: e.toString());
+      return SignInSignUpResult(message: e.toString().split(']')[1]);
     }
+  }
+
+  static Future<SignInSignUpResult> signIn(
+      String email, String password) async {
+    try {
+      UserCredential credential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      UserAccount? user =
+          await credential.user?.fromFirestore(credential.user!.uid);
+
+      return SignInSignUpResult(user: user);
+    } catch (e) {
+      return SignInSignUpResult(message: e.toString().split(']')[1]);
+    }
+  }
+
+  static Future<void> signOut() async {
+    await _auth.signOut();
   }
 }
 
