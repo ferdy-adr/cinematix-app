@@ -30,7 +30,11 @@ class AuthServices {
 
       return SignInSignUpResult(user: user);
     } catch (e) {
-      return SignInSignUpResult(message: e.toString().split(']')[1]);
+      if (e.toString().contains(']')) {
+        return SignInSignUpResult(message: e.toString().split(']')[1]);
+      } else {
+        return SignInSignUpResult(message: e.toString());
+      }
     }
   }
 

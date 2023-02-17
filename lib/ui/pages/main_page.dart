@@ -1,8 +1,7 @@
 part of 'pages.dart';
 
 class MainPage extends StatelessWidget {
-  final String? userId;
-  const MainPage({super.key, required this.userId});
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +11,15 @@ class MainPage extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(userId ?? 'User data is empty'),
+            BlocBuilder<UserBloc, UserState>(
+              builder: (_, state) {
+                return (state is UserLoaded)
+                    ? Text(state.user.name.toString())
+                    : const SizedBox();
+              },
+            ),
             ElevatedButton(
               onPressed: () async {
                 await AuthServices.signOut();

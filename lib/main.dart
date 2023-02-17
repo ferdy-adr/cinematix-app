@@ -1,4 +1,5 @@
 import 'package:cinematix/bloc/blocs.dart';
+import 'package:cinematix/bloc/user_bloc.dart';
 import 'package:cinematix/services/services.dart';
 import 'package:cinematix/ui/pages/pages.dart';
 
@@ -24,9 +25,8 @@ class MyApp extends StatelessWidget {
       initialData: null,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (_) => PageBloc(),
-          ),
+          BlocProvider(create: (_) => PageBloc()),
+          BlocProvider(create: (_) => UserBloc())
         ],
         child: const MaterialApp(
           home: Wrapper(),
