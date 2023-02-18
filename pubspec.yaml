@@ -37,7 +37,6 @@ dependencies:
   equatable: ^2.0.5
   provider: ^6.0.5
   flutter_bloc: ^8.1.2
-  google_fonts: ^4.0.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -66,7 +65,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -80,10 +79,42 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: assets/fonts/Raleway/Raleway-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Raleway/Raleway-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Raleway/Raleway-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Raleway/Raleway-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Raleway/Raleway-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Raleway/Raleway-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Raleway/Raleway-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Raleway/Raleway-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Raleway/Raleway-Black.ttf
+          weight: 900
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans/OpenSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/OpenSans/OpenSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/OpenSans/OpenSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/OpenSans/OpenSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/OpenSans/OpenSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/OpenSans/OpenSans-ExtraBold.ttf
+          weight: 800
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
