@@ -1,5 +1,4 @@
 import 'package:cinematix/bloc/blocs.dart';
-import 'package:cinematix/bloc/user_bloc.dart';
 import 'package:cinematix/services/services.dart';
 import 'package:cinematix/ui/pages/pages.dart';
 
