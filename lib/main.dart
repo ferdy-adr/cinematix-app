@@ -30,12 +30,14 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_) => UserBloc()),
           BlocProvider(create: (_) => ThemeBloc()),
         ],
-        child: MaterialApp(
-          theme: ThemeData(
-            primarySwatch: accentColor2.getMaterialColor(),
-          ),
-          debugShowCheckedModeBanner: false,
-          home: const Wrapper(),
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (_, themeState) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: themeState.themeData,
+              home: const Wrapper(),
+            );
+          },
         ),
       ),
     );
