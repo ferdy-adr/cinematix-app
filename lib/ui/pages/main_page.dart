@@ -22,7 +22,9 @@ class MainPage extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () async {
-                await AuthServices.signOut();
+                await AuthServices.signOut().then(
+                  (_) => BlocProvider.of<UserBloc>(context).add(SignOut()),
+                );
               },
               child: const Text('Sign Out'),
             ),

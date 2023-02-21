@@ -1,6 +1,8 @@
 import 'package:cinematix/bloc/blocs.dart';
 import 'package:cinematix/services/services.dart';
+import 'package:cinematix/shared/shared.dart';
 import 'package:cinematix/ui/pages/pages.dart';
+import 'package:cinematix/extensions/extensions.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -25,10 +27,15 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => PageBloc()),
-          BlocProvider(create: (_) => UserBloc())
+          BlocProvider(create: (_) => UserBloc()),
+          BlocProvider(create: (_) => ThemeBloc()),
         ],
-        child: const MaterialApp(
-          home: Wrapper(),
+        child: MaterialApp(
+          theme: ThemeData(
+            primarySwatch: accentColor2.getMaterialColor(),
+          ),
+          debugShowCheckedModeBanner: false,
+          home: const Wrapper(),
         ),
       ),
     );
