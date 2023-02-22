@@ -1,8 +1,6 @@
 import 'package:cinematix/bloc/blocs.dart';
 import 'package:cinematix/services/services.dart';
-import 'package:cinematix/shared/shared.dart';
 import 'package:cinematix/ui/pages/pages.dart';
-import 'package:cinematix/extensions/extensions.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

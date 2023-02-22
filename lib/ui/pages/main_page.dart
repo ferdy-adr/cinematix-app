@@ -1,36 +1,174 @@
 part of 'pages.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({super.key});
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  int bottomNavBarIndex = 0;
+  PageController pageController = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    bottomNavBarIndex = 0;
+    pageController = PageController(initialPage: bottomNavBarIndex);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Main Page'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: accentColor1,
+      body: SafeArea(
+        child: Stack(
           children: [
-            BlocBuilder<UserBloc, UserState>(
-              builder: (_, state) {
-                return (state is UserLoaded)
-                    ? Text(state.user.name.toString())
-                    : const SizedBox();
-              },
+            Container(
+              color: whitebackgroundColor2,
+              child: PageView(
+                controller: pageController,
+                onPageChanged: (value) {
+                  setState(() {
+                    bottomNavBarIndex = value;
+                  });
+                },
+                children: [
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        await AuthServices.signOut().then(
+                          (_) =>
+                              BlocProvider.of<UserBloc>(context).add(SignOut()),
+                        );
+                      },
+                      child: const Text('Sign Out'),
+                    ),
+                  ),
+                  const Center(
+                    child: Text('My Tickets'),
+                  ),
+                ],
+              ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await AuthServices.signOut().then(
-                  (_) => BlocProvider.of<UserBloc>(context).add(SignOut()),
-                );
-              },
-              child: const Text('Sign Out'),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: createCustomBottomNavBar(),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: 46,
+                height: 46,
+                margin: const EdgeInsets.only(bottom: 42),
+                child: FloatingActionButton(
+                  onPressed: () {},
+                  elevation: 0,
+                  backgroundColor: accentColor2,
+                  child: Icon(
+                    size: 26,
+                    MdiIcons.walletPlus,
+                    color: Colors.black.withOpacity(0.54),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
   }
+
+  ClipPath createCustomBottomNavBar() {
+    return ClipPath(
+      clipper: BottomNavBarClipper(),
+      child: Container(
+        height: 65,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: BottomNavigationBar(
+          currentIndex: bottomNavBarIndex,
+          onTap: (value) {
+            setState(() {
+              bottomNavBarIndex = value;
+              pageController.jumpToPage(value);
+            });
+          },
+          selectedItemColor: Colors.black,
+          unselectedItemColor: const Color.fromRGBO(224, 224, 224, 1),
+          selectedLabelStyle: const TextStyle(
+            fontFamily: 'Raleway',
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+          ),
+          unselectedLabelStyle: const TextStyle(
+            fontFamily: 'Raleway',
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+          ),
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              label: 'New Movies',
+              icon: Column(
+                children: [
+                  SizedBox(
+                    height: 20,
+                    child: Image(
+                      image: AssetImage((bottomNavBarIndex == 0)
+                          ? 'assets/images/ic_movie.png'
+                          : 'assets/images/ic_movie_grey.png'),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                ],
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: 'My Tickets',
+              icon: Column(
+                children: [
+                  SizedBox(
+                    height: 20,
+                    child: Image(
+                      image: AssetImage((bottomNavBarIndex == 1)
+                          ? 'assets/images/ic_tickets.png'
+                          : 'assets/images/ic_tickets_grey.png'),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BottomNavBarClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+
+    path.lineTo(size.width / 2 - 30, 0);
+    path.quadraticBezierTo(size.width / 2 - 30, 33, size.width / 2, 33);
+    path.quadraticBezierTo(size.width / 2 + 30, 33, size.width / 2 + 30, 0);
+    path.lineTo(size.width, 0);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
