@@ -36,6 +36,9 @@ class _MainPageState extends State<MainPage> {
                   });
                 },
                 children: [
+                  // Movie Page
+                  const MoviePage(),
+
                   Center(
                     child: ElevatedButton(
                       onPressed: () async {
@@ -46,9 +49,6 @@ class _MainPageState extends State<MainPage> {
                       },
                       child: const Text('Sign Out'),
                     ),
-                  ),
-                  const Center(
-                    child: Text('My Tickets'),
                   ),
                 ],
               ),
