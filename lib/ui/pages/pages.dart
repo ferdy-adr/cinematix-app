@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:cinematix/extensions/extensions.dart';
+import 'package:cinematix/models/models.dart';
 import 'package:cinematix/shared/shared.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,3 +19,6 @@ part 'splash_page.dart';
 part 'sign_in_page.dart';
 part 'main_page.dart';
 part 'movie_page.dart';
+part 'sign_up_page.dart';
+part 'preference_page.dart';
+part 'account_confirmation_page.dart';
