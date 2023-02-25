@@ -1,11 +1,12 @@
 part of 'models.dart';
 
+// ignore: must_be_immutable
 class RegistrationData extends Equatable {
   final String name, email, password, selectedLanguage;
   final List<String> selectedGenre;
-  final File? profilePicture;
+  File? profilePicture;
 
-  const RegistrationData({
+  RegistrationData({
     this.name = '',
     this.email = '',
     this.password = '',

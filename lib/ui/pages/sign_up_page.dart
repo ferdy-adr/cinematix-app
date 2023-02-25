@@ -81,26 +81,59 @@ class _SignUpPageState extends State<SignUpPage> {
                           width: 90,
                           height: 102,
                           child: Stack(
-                            children: const [
+                            children: [
                               Align(
                                 alignment: Alignment.topCenter,
                                 child: SizedBox(
                                   width: 90,
                                   height: 90,
-                                  child: Image(
-                                    image: AssetImage(
-                                        'assets/images/user_pic.png'),
-                                  ),
+                                  child:
+                                      (widget.registrationData.profilePicture !=
+                                              null)
+                                          ? CircleAvatar(
+                                              backgroundImage: Image(
+                                                image: FileImage(
+                                                  widget.registrationData
+                                                      .profilePicture!,
+                                                ),
+                                                fit: BoxFit.cover,
+                                              ).image,
+                                            )
+                                          : const Image(
+                                              image: AssetImage(
+                                                'assets/images/user_pic.png',
+                                              ),
+                                            ),
                                 ),
                               ),
                               Align(
                                 alignment: Alignment.bottomCenter,
-                                child: SizedBox(
-                                  width: 28,
-                                  height: 28,
-                                  child: Image(
-                                    image: AssetImage(
-                                        'assets/images/btn_add_photo.png'),
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    if (widget
+                                            .registrationData.profilePicture ==
+                                        null) {
+                                      widget.registrationData.profilePicture =
+                                          await getImage();
+                                    } else {
+                                      widget.registrationData.profilePicture =
+                                          null;
+                                    }
+
+                                    setState(() {});
+                                  },
+                                  child: SizedBox(
+                                    width: 28,
+                                    height: 28,
+                                    child: Image(
+                                      image: AssetImage(
+                                        (widget.registrationData
+                                                    .profilePicture !=
+                                                null)
+                                            ? 'assets/images/btn_del_photo.png'
+                                            : 'assets/images/btn_add_photo.png',
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),

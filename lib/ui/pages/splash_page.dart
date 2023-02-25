@@ -45,9 +45,10 @@ class SplashPage extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           BlocProvider.of<PageBloc>(context)
-                              .add(const GoToSignUpPage(RegistrationData()));
+                              .add(GoToSignUpPage(RegistrationData()));
                         },
                         style: ElevatedButton.styleFrom(
+                          elevation: 0,
                           backgroundColor: mainColor,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
