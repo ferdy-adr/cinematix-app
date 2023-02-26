@@ -212,7 +212,80 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         const SizedBox(height: 30),
                         FloatingActionButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            if (nameController.text.trim() == '' &&
+                                emailController.text.trim() == '' &&
+                                passwordController.text.trim() == '' &&
+                                confirmPasswordController.text.trim() == '') {
+                              Flushbar(
+                                messageText: Text(
+                                  'Please fill all the fields',
+                                  style: whiteTextFont.copyWith(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                duration: const Duration(seconds: 4),
+                                backgroundColor: const Color(0xFFFF5C83),
+                                flushbarPosition: FlushbarPosition.TOP,
+                              ).show(context);
+                            } else if (passwordController.text !=
+                                confirmPasswordController.text) {
+                              Flushbar(
+                                messageText: Text(
+                                  'Mismatch password and confirmed password',
+                                  style: whiteTextFont.copyWith(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                duration: const Duration(seconds: 4),
+                                backgroundColor: const Color(0xFFFF5C83),
+                                flushbarPosition: FlushbarPosition.TOP,
+                              ).show(context);
+                            } else if (passwordController.text.length < 6) {
+                              Flushbar(
+                                messageText: Text(
+                                  'Password\'s length min 6 characters',
+                                  style: whiteTextFont.copyWith(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                duration: const Duration(seconds: 4),
+                                backgroundColor: const Color(0xFFFF5C83),
+                                flushbarPosition: FlushbarPosition.TOP,
+                              ).show(context);
+                            } else if (!EmailValidator.validate(
+                                emailController.text)) {
+                              Flushbar(
+                                messageText: Text(
+                                  'Wrong formatted email address',
+                                  style: whiteTextFont.copyWith(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                duration: const Duration(seconds: 4),
+                                backgroundColor: const Color(0xFFFF5C83),
+                                flushbarPosition: FlushbarPosition.TOP,
+                              ).show(context);
+                            } else {
+                              widget.registrationData.name =
+                                  nameController.text;
+                              widget.registrationData.email =
+                                  emailController.text;
+                              widget.registrationData.password =
+                                  passwordController.text;
+
+                              BlocProvider.of<PageBloc>(context).add(
+                                  GoToPreferencePage(widget.registrationData));
+                            }
+                          },
                           elevation: 0,
                           backgroundColor: const Color(0xFF503E9D),
                           child: const Icon(
