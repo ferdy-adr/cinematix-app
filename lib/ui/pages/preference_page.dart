@@ -25,12 +25,12 @@ class PreferencePage extends StatefulWidget {
 
 class _PreferencePageState extends State<PreferencePage> {
   List<String> selectedGenre = [];
-  String? selectedLanguage;
+  String selectedLanguage = 'English';
 
   @override
   void initState() {
     super.initState();
-    selectedGenre = widget.registrationData.selectedGenre;
+    selectedGenre.addAll(widget.registrationData.selectedGenre);
     selectedLanguage = widget.registrationData.selectedLanguage;
   }
 
@@ -108,28 +108,28 @@ class _PreferencePageState extends State<PreferencePage> {
                       ),
                       const SizedBox(height: 30),
                       FloatingActionButton(
-                        onPressed: (selectedGenre.isNotEmpty &&
-                                selectedLanguage != null)
-                            ? () {
-                                widget.registrationData.selectedGenre =
-                                    selectedGenre;
-                                widget.registrationData.selectedLanguage =
-                                    selectedLanguage!;
+                        onPressed:
+                            (selectedGenre.isNotEmpty && selectedLanguage != '')
+                                ? () {
+                                    widget.registrationData.selectedGenre =
+                                        selectedGenre;
+                                    widget.registrationData.selectedLanguage =
+                                        selectedLanguage;
 
-                                BlocProvider.of<PageBloc>(context).add(
-                                    GoToAccountConfirmationPage(
-                                        widget.registrationData));
-                              }
-                            : null,
+                                    BlocProvider.of<PageBloc>(context).add(
+                                        GoToAccountConfirmationPage(
+                                            widget.registrationData));
+                                  }
+                                : null,
                         elevation: 0,
-                        backgroundColor: (selectedGenre.isNotEmpty &&
-                                selectedLanguage != null)
-                            ? mainColor
-                            : const Color(0xFFE4E4E4),
+                        backgroundColor:
+                            (selectedGenre.isNotEmpty && selectedLanguage != '')
+                                ? mainColor
+                                : const Color(0xFFE4E4E4),
                         child: Icon(
                           Icons.arrow_forward,
                           color: (selectedGenre.isNotEmpty &&
-                                  selectedLanguage != null)
+                                  selectedLanguage != '')
                               ? Colors.white
                               : const Color(0xFFBEBEBE),
                         ),
@@ -204,13 +204,13 @@ class _PreferencePageState extends State<PreferencePage> {
               height: 60,
               isSelected: selectedLanguage == e,
               onTap: () {
-                if (selectedLanguage == null) {
+                if (selectedLanguage == '') {
                   selectedLanguage = e;
 
                   setState(() {});
                 } else {
                   if (selectedLanguage == e) {
-                    selectedLanguage = null;
+                    selectedLanguage = '';
 
                     setState(() {});
                   } else {
