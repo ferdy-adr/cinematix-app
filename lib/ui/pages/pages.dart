@@ -4,6 +4,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:cinematix/extensions/extensions.dart';
 import 'package:cinematix/models/models.dart';
 import 'package:cinematix/shared/shared.dart';
+import 'package:cinematix/ui/widgets/widgets.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
