@@ -159,33 +159,7 @@ class _PreferencePageState extends State<PreferencePage> {
               height: 60,
               isSelected: selectedGenre.contains(e),
               onTap: () {
-                if (!selectedGenre.contains(e)) {
-                  if (selectedGenre.length < 4) {
-                    selectedGenre.add(e);
-
-                    setState(() {});
-                  } else {
-                    Flushbar(
-                      messageText: Text(
-                        'Can only select maximum 4 genre',
-                        style: whiteTextFont.copyWith(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      duration: const Duration(seconds: 4),
-                      backgroundColor: const Color(0xFFFF5C83),
-                      flushbarPosition: FlushbarPosition.TOP,
-                    ).show(context);
-
-                    setState(() {});
-                  }
-                } else {
-                  selectedGenre.remove(e);
-
-                  setState(() {});
-                }
+                onSelectGenre(e);
               },
             ))
         .toList();
@@ -204,35 +178,37 @@ class _PreferencePageState extends State<PreferencePage> {
               height: 60,
               isSelected: selectedLanguage == e,
               onTap: () {
-                if (selectedLanguage == '') {
-                  selectedLanguage = e;
+                selectedLanguage = e;
 
-                  setState(() {});
-                } else {
-                  if (selectedLanguage == e) {
-                    selectedLanguage = '';
-
-                    setState(() {});
-                  } else {
-                    Flushbar(
-                      messageText: Text(
-                        'Can only select 1 language',
-                        style: whiteTextFont.copyWith(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      duration: const Duration(seconds: 4),
-                      backgroundColor: const Color(0xFFFF5C83),
-                      flushbarPosition: FlushbarPosition.TOP,
-                    ).show(context);
-
-                    setState(() {});
-                  }
-                }
+                setState(() {});
               },
             ))
         .toList();
+  }
+
+  void onSelectGenre(String genre) {
+    if (!selectedGenre.contains(genre)) {
+      if (selectedGenre.length < 4) {
+        selectedGenre.add(genre);
+      } else {
+        Flushbar(
+          messageText: Text(
+            'Can only select maximum 4 genre',
+            style: whiteTextFont.copyWith(
+              fontSize: 13,
+              fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          duration: const Duration(seconds: 4),
+          backgroundColor: const Color(0xFFFF5C83),
+          flushbarPosition: FlushbarPosition.TOP,
+        ).show(context);
+      }
+    } else {
+      selectedGenre.remove(genre);
+    }
+
+    setState(() {});
   }
 }
