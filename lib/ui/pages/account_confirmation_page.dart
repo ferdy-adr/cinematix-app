@@ -107,13 +107,39 @@ class _AccountConfirmationPageState extends State<AccountConfirmationPage> {
                                     isSigningUp = true;
                                   });
 
-                                  await Future.delayed(
-                                    const Duration(seconds: 3),
-                                  );
+                                  imageFileToUpload =
+                                      widget.registrationData.profilePicture;
+                                  SignInSignUpResult result =
+                                      await AuthServices.signUp(
+                                          widget.registrationData.email,
+                                          widget.registrationData.password,
+                                          widget.registrationData.name,
+                                          widget.registrationData.selectedGenre,
+                                          widget.registrationData
+                                              .selectedLanguage);
 
-                                  setState(() {
-                                    isSigningUp = false;
-                                  });
+                                  if (result.user == null) {
+                                    setState(() {
+                                      isSigningUp = false;
+                                    });
+
+                                    if (context.mounted) {
+                                      Flushbar(
+                                        messageText: Text(
+                                          result.message.toString(),
+                                          style: whiteTextFont.copyWith(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        duration: const Duration(seconds: 4),
+                                        backgroundColor:
+                                            const Color(0xFFFF5C83),
+                                        flushbarPosition: FlushbarPosition.TOP,
+                                      ).show(context);
+                                    }
+                                  }
                                 },
                                 style: ElevatedButton.styleFrom(
                                   elevation: 0,
