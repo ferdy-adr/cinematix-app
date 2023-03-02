@@ -13,6 +13,15 @@ class UserAccount extends Equatable {
       this.selectedLanguage,
       this.balance});
 
+  UserAccount copyWith({String? name, String? profilePicture, int? balance}) {
+    return UserAccount(id, email,
+        name: name ?? this.name,
+        profilePicture: profilePicture ?? this.profilePicture,
+        balance: balance ?? this.balance,
+        selectedGenre: selectedGenre,
+        selectedLanguage: selectedLanguage);
+  }
+
   @override
   String toString() {
     return '[$id] - $name, $email';

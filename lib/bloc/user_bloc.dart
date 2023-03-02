@@ -33,6 +33,12 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         } else {
           emit(UserInitial());
         }
+      } else if (event is UpdateData) {
+        UserAccount updateUser = (state as UserLoaded)
+            .user
+            .copyWith(name: event.name, profilePicture: event.profilePicture);
+
+        emit(UserLoaded(updateUser));
       } else if (event is SignOut) {
         emit(UserInitial());
       }

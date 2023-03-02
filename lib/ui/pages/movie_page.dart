@@ -22,6 +22,17 @@ class MoviePage extends StatelessWidget {
           child: BlocBuilder<UserBloc, UserState>(
             builder: (_, userState) {
               if (userState is UserLoaded) {
+                if (imageFileToUpload['profilePicture'] != null &&
+                    imageFileToUpload['uid'] == userState.user.id) {
+                  uploadImage(imageFileToUpload['profilePicture'])
+                      .then((downloadURL) {
+                    imageFileToUpload.updateAll((key, value) => value = null);
+
+                    BlocProvider.of<UserBloc>(context)
+                        .add(UpdateData(profilePicture: downloadURL));
+                  });
+                }
+
                 return Row(
                   children: [
                     Container(
@@ -35,12 +46,15 @@ class MoviePage extends StatelessWidget {
                         ),
                       ),
                       child: CircleAvatar(
-                        child: Image(
+                        backgroundImage: Image(
                           image: (userState.user.profilePicture == '')
                               ? const AssetImage('assets/images/user_pic.png')
-                              : Image.network(userState.user.profilePicture!)
-                                  .image,
-                        ),
+                                  as ImageProvider
+                              : NetworkImage(
+                                  userState.user.profilePicture!,
+                                ),
+                          fit: BoxFit.cover,
+                        ).image,
                       ),
                     ),
                     const SizedBox(width: 16),

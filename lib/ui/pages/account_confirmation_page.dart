@@ -107,8 +107,6 @@ class _AccountConfirmationPageState extends State<AccountConfirmationPage> {
                                     isSigningUp = true;
                                   });
 
-                                  imageFileToUpload =
-                                      widget.registrationData.profilePicture;
                                   SignInSignUpResult result =
                                       await AuthServices.signUp(
                                           widget.registrationData.email,
@@ -117,6 +115,13 @@ class _AccountConfirmationPageState extends State<AccountConfirmationPage> {
                                           widget.registrationData.selectedGenre,
                                           widget.registrationData
                                               .selectedLanguage);
+
+                                  // Map for match image by email address
+                                  if (result.user != null) {
+                                    imageFileToUpload['uid'] = result.user?.id;
+                                    imageFileToUpload['profilePicture'] =
+                                        widget.registrationData.profilePicture;
+                                  }
 
                                   if (result.user == null) {
                                     setState(() {
