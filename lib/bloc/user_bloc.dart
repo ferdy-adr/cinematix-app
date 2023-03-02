@@ -37,6 +37,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         UserAccount updateUser = (state as UserLoaded)
             .user
             .copyWith(name: event.name, profilePicture: event.profilePicture);
+        await UserAccountServices.updateUser(updateUser);
 
         emit(UserLoaded(updateUser));
       } else if (event is SignOut) {
