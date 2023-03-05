@@ -99,6 +99,48 @@ class MoviePage extends StatelessWidget {
             },
           ),
         ),
+
+        // Now Playing section
+        Container(
+          alignment: Alignment.centerLeft,
+          margin:
+              const EdgeInsets.fromLTRB(defaultMargin, 30, defaultMargin, 12),
+          child: Text(
+            'Now Playing',
+            style: blackTextFont.copyWith(fontSize: 16),
+          ),
+        ),
+        SizedBox(
+            height: 140,
+            child: BlocBuilder<MovieBloc, MovieState>(
+              builder: (_, movieState) {
+                BlocProvider.of<MovieBloc>(context).add(const FetchMovies(1));
+
+                if (movieState is MovieLoaded) {
+                  List<Movie> movies = movieState.movies.sublist(0, 10);
+
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: movies.length,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: defaultMargin),
+                    itemBuilder: (_, index) => Container(
+                      margin: EdgeInsets.only(
+                        right: (movies[index] != movies.last) ? 30 : 0,
+                      ),
+                      child: Text(
+                        movies[index].title,
+                      ),
+                    ),
+                  );
+                } else {
+                  return SpinKitFadingCircle(
+                    color: mainColor,
+                    size: 50,
+                  );
+                }
+              },
+            )),
       ],
     );
   }
