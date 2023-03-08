@@ -111,12 +111,13 @@ class MoviePage extends StatelessWidget {
           ),
         ),
         SizedBox(
-            height: 140,
-            child: BlocBuilder<MovieBloc, MovieState>(
-              builder: (_, movieState) {
-                BlocProvider.of<MovieBloc>(context).add(const FetchMovies(1));
+          height: 140,
+          child: BlocBuilder<MovieBloc, MovieState>(
+            builder: (_, movieState) {
+              BlocProvider.of<MovieBloc>(context).add(const FetchMovies(1));
 
-                if (movieState is MovieLoaded) {
+              if (movieState is MovieLoaded) {
+                if (movieState.movies.isNotEmpty) {
                   List<Movie> movies = movieState.movies.sublist(0, 10);
 
                   return ListView.builder(
@@ -126,21 +127,29 @@ class MoviePage extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: defaultMargin),
                     itemBuilder: (_, index) => Container(
                       margin: EdgeInsets.only(
-                        right: (movies[index] != movies.last) ? 30 : 0,
+                        right: (movies[index] != movies.last) ? 16 : 0,
                       ),
-                      child: Text(
-                        movies[index].title,
-                      ),
+                      child: MovieCard(movies[index]),
                     ),
                   );
                 } else {
-                  return SpinKitFadingCircle(
-                    color: mainColor,
-                    size: 50,
+                  return const Center(
+                    child: Text(
+                      'No data found',
+                      style:
+                          TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                    ),
                   );
                 }
-              },
-            )),
+              } else {
+                return SpinKitFadingCircle(
+                  color: mainColor,
+                  size: 50,
+                );
+              }
+            },
+          ),
+        ),
       ],
     );
   }
