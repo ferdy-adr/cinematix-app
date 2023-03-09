@@ -189,6 +189,59 @@ class MoviePage extends StatelessWidget {
             ),
           ),
         ),
+
+        // section: COMING SOON
+        Container(
+          alignment: Alignment.centerLeft,
+          margin:
+              const EdgeInsets.fromLTRB(defaultMargin, 30, defaultMargin, 12),
+          child: Text(
+            'Coming Soon',
+            style: blackTextFont.copyWith(fontSize: 16),
+          ),
+        ),
+        SizedBox(
+          height: 140,
+          child: BlocBuilder<MovieBloc, MovieState>(
+            builder: (_, movieState) {
+              BlocProvider.of<MovieBloc>(context).add(const FetchMovies(1));
+
+              if (movieState is MovieLoaded) {
+                if (movieState.movies.isNotEmpty) {
+                  List<Movie> movies = movieState.movies.sublist(10);
+
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: movies.length,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: defaultMargin),
+                    itemBuilder: (_, index) => Container(
+                      margin: EdgeInsets.only(
+                        right: (movies[index] != movies.last) ? 16 : 0,
+                      ),
+                      child: ComingSoonCard(movies[index]),
+                    ),
+                  );
+                } else {
+                  return const Center(
+                    child: Text(
+                      'No data found',
+                      style:
+                          TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                    ),
+                  );
+                }
+              } else {
+                return SpinKitFadingCircle(
+                  color: mainColor,
+                  size: 50,
+                );
+              }
+            },
+          ),
+        ),
+
+        const SizedBox(height: 138),
       ],
     );
   }
