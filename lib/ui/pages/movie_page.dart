@@ -7,7 +7,7 @@ class MoviePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        // Header
+        // section: HEADER
         Container(
           height: 110,
           padding:
@@ -100,7 +100,7 @@ class MoviePage extends StatelessWidget {
           ),
         ),
 
-        // Now Playing section
+        // section: NOW PLAYING
         Container(
           alignment: Alignment.centerLeft,
           margin:
@@ -148,6 +148,45 @@ class MoviePage extends StatelessWidget {
                 );
               }
             },
+          ),
+        ),
+
+        // section: BROWSE MOVIE
+        Container(
+          alignment: Alignment.centerLeft,
+          margin:
+              const EdgeInsets.fromLTRB(defaultMargin, 30, defaultMargin, 12),
+          child: Text(
+            'Browse Movie',
+            style: blackTextFont.copyWith(fontSize: 16),
+          ),
+        ),
+        SizedBox(
+          height: 68,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: defaultMargin),
+            child: BlocBuilder<UserBloc, UserState>(
+              builder: (_, userState) {
+                if (userState is UserLoaded) {
+                  List<String> genres = userState.user.selectedGenre!;
+
+                  List<Widget> widgets = List.generate(
+                    genres.length,
+                    (index) => BrowseButton(genres[index]),
+                  );
+
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: widgets,
+                  );
+                } else {
+                  return SpinKitFadingCircle(
+                    size: 40,
+                    color: mainColor,
+                  );
+                }
+              },
+            ),
           ),
         ),
       ],
