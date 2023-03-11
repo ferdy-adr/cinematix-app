@@ -1,6 +1,6 @@
 part of 'shared.dart';
 
-String apiKey = '';
+String apiKey = tmdbKeyAPI;
 String baseURL = '';
 String imageBaseURL = 'https://image.tmdb.org/t/p/';
 
