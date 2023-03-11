@@ -241,7 +241,34 @@ class MoviePage extends StatelessWidget {
           ),
         ),
 
-        const SizedBox(height: 138),
+        // section: PROMO
+        Container(
+          margin:
+              const EdgeInsets.fromLTRB(defaultMargin, 30, defaultMargin, 138),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Get Lucky Day',
+                  style: blackTextFont.copyWith(fontSize: 16),
+                ),
+              ),
+              const SizedBox(height: 13),
+              Column(
+                children: List.generate(
+                  dummyPromos.length,
+                  (index) => Container(
+                    margin: EdgeInsets.only(
+                      bottom: (index != (dummyPromos.length - 1)) ? 16 : 0,
+                    ),
+                    child: PromoCard(dummyPromos[index]),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
