@@ -21,7 +21,7 @@ class ComingSoonCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: NetworkImage('${imageBaseURL}w500${movie.posterPath}'),
+            image: NetworkImage('$imageBaseURL/w500${movie.posterPath}'),
           ),
         ),
       ),

@@ -2,7 +2,7 @@ part of 'shared.dart';
 
 String apiKey = tmdbKeyAPI;
 String baseURL = '';
-String imageBaseURL = 'https://image.tmdb.org/t/p/';
+String imageBaseURL = 'https://image.tmdb.org/t/p';
 
 PageEvent? prevPageEvent;
 

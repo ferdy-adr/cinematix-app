@@ -21,7 +21,7 @@ class MovieCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: NetworkImage('${imageBaseURL}w500${movie.backdropPath}'),
+            image: NetworkImage('$imageBaseURL/w500${movie.backdropPath}'),
           ),
         ),
         child: Container(
