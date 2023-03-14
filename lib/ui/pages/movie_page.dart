@@ -129,7 +129,13 @@ class MoviePage extends StatelessWidget {
                       margin: EdgeInsets.only(
                         right: (movies[index] != movies.last) ? 16 : 0,
                       ),
-                      child: MovieCard(movies[index]),
+                      child: MovieCard(
+                        movies[index],
+                        onTap: () {
+                          BlocProvider.of<PageBloc>(context)
+                              .add(GoToMovieDetailPage(movies[index]));
+                        },
+                      ),
                     ),
                   );
                 } else {
