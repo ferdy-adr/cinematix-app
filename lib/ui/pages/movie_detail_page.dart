@@ -78,7 +78,54 @@ class MovieDetailPage extends StatelessWidget {
                                 ),
                               ),
 
-                              // section: CREDIT
+                              // section: CAST & CREW
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: defaultMargin),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    'Cast & Crew',
+                                    style: blackTextFont.copyWith(fontSize: 14),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              SizedBox(
+                                height: 110,
+                                child: FutureBuilder(
+                                  future:
+                                      MovieServices.getCredits(movieDetail.id),
+                                  builder: (_, snapshot) {
+                                    if (snapshot.hasData) {
+                                      credits = snapshot.data!;
+
+                                      return ListView.builder(
+                                        scrollDirection: Axis.horizontal,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: defaultMargin),
+                                        itemCount: credits.length,
+                                        itemBuilder: (_, index) {
+                                          return Container(
+                                            margin: EdgeInsets.only(
+                                                right: (index !=
+                                                        credits.length - 1)
+                                                    ? 12
+                                                    : 0),
+                                            child: CastCrewCard(credits[index]),
+                                          );
+                                        },
+                                      );
+                                    } else {
+                                      return SpinKitFadingCircle(
+                                        color: mainColor,
+                                        size: 40,
+                                      );
+                                    }
+                                  },
+                                ),
+                              ),
+                              const SizedBox(height: 24),
                             ],
                           ),
                         ),
