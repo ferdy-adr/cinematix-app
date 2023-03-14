@@ -1,7 +1,7 @@
 part of 'models.dart';
 
 class Credit extends Equatable {
-  final String name, profilePath;
+  final String? name, profilePath;
 
   const Credit({required this.name, required this.profilePath});
 

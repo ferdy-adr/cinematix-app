@@ -72,7 +72,7 @@ class MovieServices {
     http.Response response = await client.get(Uri.parse(apiURL));
 
     var jsonResult = json.decode(response.body);
-    List<Map<String, dynamic>> data = jsonResult['cast'];
+    List<dynamic> data = jsonResult['cast'];
 
     return data
         .map((e) => Credit(name: e['name'], profilePath: e['profile_path']))
