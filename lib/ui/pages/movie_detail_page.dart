@@ -36,6 +36,56 @@ class MovieDetailPage extends StatelessWidget {
                               SizedBox(
                                 height: 270,
                                 child: Image(
+                                  loadingBuilder: (_, child, loadingProgress) {
+                                    if (loadingProgress
+                                            ?.cumulativeBytesLoaded ==
+                                        loadingProgress?.expectedTotalBytes) {
+                                      return Stack(
+                                        fit: StackFit.expand,
+                                        children: [
+                                          child,
+                                          Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: Container(
+                                              height: 70.2,
+                                              decoration: const BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Colors.white,
+                                                    Colors.transparent
+                                                  ],
+                                                  begin: Alignment.bottomCenter,
+                                                  end: Alignment.topCenter,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 16,
+                                                horizontal: defaultMargin),
+                                            child: Align(
+                                              alignment: Alignment.topLeft,
+                                              child: GestureDetector(
+                                                onTap: () =>
+                                                    BlocProvider.of<PageBloc>(
+                                                            context)
+                                                        .add(GoToMainPage()),
+                                                child: const Icon(
+                                                  Icons.arrow_back,
+                                                  color: Colors.white,
+                                                  size: 24,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    } else {
+                                      return SpinKitFadingCircle(
+                                          color: mainColor);
+                                    }
+                                  },
                                   fit: BoxFit.cover,
                                   image: NetworkImage(
                                       '$imageBaseURL/original${movieDetail.backdropPath}'),
