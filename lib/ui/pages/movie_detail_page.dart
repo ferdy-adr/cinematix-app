@@ -126,6 +126,68 @@ class MovieDetailPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 24),
+
+                              // section: STORYLINE
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: defaultMargin),
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        'Storyline',
+                                        style: blackTextFont.copyWith(
+                                            fontSize: 14),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      movieDetail.overview,
+                                      style: greyTextFont.copyWith(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        height: 1.428,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 30),
+
+                              // section: BUTTON
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 55),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: SizedBox(
+                                        height: 46,
+                                        child: ElevatedButton(
+                                          onPressed: () {},
+                                          style: ElevatedButton.styleFrom(
+                                            elevation: 0,
+                                            backgroundColor: mainColor,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            'Continue to Book',
+                                            style: whiteTextFont.copyWith(
+                                              fontSize: 16,
+                                              height: 1.375,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 40),
                             ],
                           ),
                         ),
