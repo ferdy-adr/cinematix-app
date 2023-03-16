@@ -215,7 +215,11 @@ class MovieDetailPage extends StatelessWidget {
                                       child: SizedBox(
                                         height: 46,
                                         child: ElevatedButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            BlocProvider.of<PageBloc>(context)
+                                                .add(GoToSelectSchedulePage(
+                                                    movieDetail));
+                                          },
                                           style: ElevatedButton.styleFrom(
                                             elevation: 0,
                                             backgroundColor: mainColor,

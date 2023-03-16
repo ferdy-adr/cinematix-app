@@ -22,6 +22,8 @@ class PageBloc extends Bloc<PageEvent, PageState> {
         emit(OnMainPage());
       } else if (event is GoToMovieDetailPage) {
         emit(OnMovieDetailPage(event.movie));
+      } else if (event is GoToSelectSchedulePage) {
+        emit(OnSelectSchedulePage(event.movieDetail));
       }
     });
   }
