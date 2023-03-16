@@ -1,3 +1,4 @@
+import 'package:cinematix/extensions/extensions.dart';
 import 'package:cinematix/shared/shared.dart';
 import 'package:flutter/material.dart';
 
@@ -10,3 +11,4 @@ part 'browse_button.dart';
 part 'coming_soon_card.dart';
 part 'promo_card.dart';
 part 'cast_crew_card.dart';
+part 'date_card.dart';
