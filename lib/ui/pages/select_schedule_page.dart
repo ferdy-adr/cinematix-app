@@ -115,17 +115,42 @@ class _SelectSchedulePageState extends State<SelectSchedulePage> {
 
                       // section: BUTTON
                       Center(
-                        child: FloatingActionButton(
-                          onPressed: (!isValid) ? null : () {},
-                          elevation: 0,
-                          backgroundColor:
-                              (isValid) ? mainColor : const Color(0xFFE4E4E4),
-                          child: Icon(
-                            Icons.arrow_forward,
-                            color: (isValid)
-                                ? Colors.white
-                                : const Color(0xFFBEBEBE),
-                          ),
+                        child: BlocBuilder<UserBloc, UserState>(
+                          builder: (_, userState) {
+                            return FloatingActionButton(
+                              onPressed: (!isValid)
+                                  ? null
+                                  : () {
+                                      BlocProvider.of<PageBloc>(context)
+                                          .add(GoToSelectSeatPage(
+                                        Ticket(
+                                          widget.movieDetail,
+                                          bookingCode: '000000000',
+                                          name: (userState is UserLoaded &&
+                                                  userState.user.name != null)
+                                              ? userState.user.name!
+                                              : 'null',
+                                          theater: selectedTheater!,
+                                          time: DateTime(
+                                              selectedDate.year,
+                                              selectedDate.month,
+                                              selectedDate.day,
+                                              selectedTime!),
+                                        ),
+                                      ));
+                                    },
+                              elevation: 0,
+                              backgroundColor: (isValid)
+                                  ? mainColor
+                                  : const Color(0xFFE4E4E4),
+                              child: Icon(
+                                Icons.arrow_forward,
+                                color: (isValid)
+                                    ? Colors.white
+                                    : const Color(0xFFBEBEBE),
+                              ),
+                            );
+                          },
                         ),
                       ),
                       const SizedBox(height: 41),
