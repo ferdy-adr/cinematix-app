@@ -160,7 +160,13 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                       // section: BUTTON
                       Center(
                         child: FloatingActionButton(
-                          onPressed: (selectedSeats.isEmpty) ? null : () {},
+                          onPressed: (selectedSeats.isEmpty)
+                              ? null
+                              : () {
+                                  BlocProvider.of<PageBloc>(context).add(
+                                      GoToCheckoutPage(widget.ticket
+                                          .copyWith(seats: selectedSeats)));
+                                },
                           elevation: 0,
                           backgroundColor: (selectedSeats.isNotEmpty)
                               ? mainColor
