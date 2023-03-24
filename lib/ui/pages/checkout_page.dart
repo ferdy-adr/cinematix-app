@@ -30,6 +30,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   child: Column(
                     children: [
                       const SizedBox(height: 20),
+
+                      // section: HEADER
                       SizedBox(
                         height: 60,
                         child: Stack(
@@ -61,6 +63,60 @@ class _CheckoutPageState extends State<CheckoutPage> {
                           ],
                         ),
                       ),
+
+                      const SizedBox(height: 20),
+
+                      // section: MOVIE INFORMATION
+                      SizedBox(
+                        height: 90,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 70,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                      '$imageBaseURL/w300/${widget.ticket.movieDetail.posterPath}'),
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            const SizedBox(width: 20),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width -
+                                  (2 * defaultMargin + 70 + 20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.ticket.movieDetail.title,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.clip,
+                                    style: blackTextFont.copyWith(fontSize: 18),
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Text(
+                                    widget.ticket.movieDetail.genresAndLanguage,
+                                    style: greyTextFont.copyWith(fontSize: 12),
+                                  ),
+                                  const SizedBox(height: 6),
+                                  RatingStars(
+                                    voteAverage:
+                                        widget.ticket.movieDetail.voteAverage,
+                                    colorTheme: ColorTheme.darkTheme,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      // section: BOOKING DETAILS
                     ],
                   ),
                 ),
