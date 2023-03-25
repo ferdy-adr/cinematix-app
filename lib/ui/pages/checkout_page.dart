@@ -10,6 +10,9 @@ class CheckoutPage extends StatefulWidget {
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
+  int ticketPrice = 25000;
+  int ticketFee = 1500;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -117,6 +120,53 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       const SizedBox(height: 20),
 
                       // section: BOOKING DETAILS
+                      const Divider(
+                        color: Color(0xFFE4E4E4),
+                        thickness: 1,
+                      ),
+                      const SizedBox(height: 20),
+                      Column(
+                        children: [
+                          TextBookingDetails(
+                              'ID Order', widget.ticket.bookingCode),
+                          const SizedBox(height: 8),
+                          TextBookingDetails(
+                              'Cinema', widget.ticket.theater.name),
+                          const SizedBox(height: 8),
+                          TextBookingDetails(
+                              'Date & Time', widget.ticket.time.dateAndTime),
+                          const SizedBox(height: 8),
+                          TextBookingDetails(
+                              'Seat Number', widget.ticket.seatsInString),
+                          const SizedBox(height: 8),
+                          TextBookingDetails('Price',
+                              '${NumberFormat.currency(locale: "id_ID", decimalDigits: 0, symbol: "Rp ").format(ticketPrice)} x ${widget.ticket.seats!.length}'),
+                          const SizedBox(height: 8),
+                          TextBookingDetails('Fee',
+                              '${NumberFormat.currency(locale: "id_ID", decimalDigits: 0, symbol: "Rp ").format(ticketFee)} x ${widget.ticket.seats!.length}'),
+                          const SizedBox(height: 8),
+                          TextBookingDetails(
+                            'Total',
+                            NumberFormat.currency(
+                                    locale: "id_ID",
+                                    decimalDigits: 0,
+                                    symbol: "Rp ")
+                                .format((ticketPrice + ticketFee) *
+                                    widget.ticket.seats!.length),
+                            valueStyle: whiteNumberFont.copyWith(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      const Divider(
+                        color: Color(0xFFE4E4E4),
+                        thickness: 1,
+                      ),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
@@ -125,6 +175,44 @@ class _CheckoutPageState extends State<CheckoutPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class TextBookingDetails extends StatelessWidget {
+  final String item, value;
+  final TextStyle? valueStyle;
+
+  const TextBookingDetails(this.item, this.value, {this.valueStyle, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          item,
+          style: greyTextFont.copyWith(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        const SizedBox(width: 32),
+        Expanded(
+          child: Text(
+            value,
+            textAlign: TextAlign.end,
+            style: (valueStyle != null)
+                ? valueStyle
+                : whiteNumberFont.copyWith(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+          ),
+        ),
+      ],
     );
   }
 }
