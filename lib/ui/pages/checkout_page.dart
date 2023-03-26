@@ -12,6 +12,13 @@ class CheckoutPage extends StatefulWidget {
 class _CheckoutPageState extends State<CheckoutPage> {
   int ticketPrice = 25000;
   int ticketFee = 1500;
+  int totalPrice = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    totalPrice = (ticketPrice + ticketFee) * widget.ticket.seats!.length;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,32 +134,29 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       const SizedBox(height: 20),
                       Column(
                         children: [
-                          TextBookingDetails(
-                              'ID Order', widget.ticket.bookingCode),
+                          TextRowItem('ID Order', widget.ticket.bookingCode),
                           const SizedBox(height: 8),
-                          TextBookingDetails(
-                              'Cinema', widget.ticket.theater.name),
+                          TextRowItem('Cinema', widget.ticket.theater.name),
                           const SizedBox(height: 8),
-                          TextBookingDetails(
+                          TextRowItem(
                               'Date & Time', widget.ticket.time.dateAndTime),
                           const SizedBox(height: 8),
-                          TextBookingDetails(
+                          TextRowItem(
                               'Seat Number', widget.ticket.seatsInString),
                           const SizedBox(height: 8),
-                          TextBookingDetails('Price',
+                          TextRowItem('Price',
                               '${NumberFormat.currency(locale: "id_ID", decimalDigits: 0, symbol: "Rp ").format(ticketPrice)} x ${widget.ticket.seats!.length}'),
                           const SizedBox(height: 8),
-                          TextBookingDetails('Fee',
+                          TextRowItem('Fee',
                               '${NumberFormat.currency(locale: "id_ID", decimalDigits: 0, symbol: "Rp ").format(ticketFee)} x ${widget.ticket.seats!.length}'),
                           const SizedBox(height: 8),
-                          TextBookingDetails(
+                          TextRowItem(
                             'Total',
                             NumberFormat.currency(
                                     locale: "id_ID",
                                     decimalDigits: 0,
                                     symbol: "Rp ")
-                                .format((ticketPrice + ticketFee) *
-                                    widget.ticket.seats!.length),
+                                .format(totalPrice),
                             valueStyle: whiteNumberFont.copyWith(
                               color: Colors.black,
                               fontSize: 16,
@@ -179,11 +183,11 @@ class _CheckoutPageState extends State<CheckoutPage> {
   }
 }
 
-class TextBookingDetails extends StatelessWidget {
+class TextRowItem extends StatelessWidget {
   final String item, value;
   final TextStyle? valueStyle;
 
-  const TextBookingDetails(this.item, this.value, {this.valueStyle, super.key});
+  const TextRowItem(this.item, this.value, {this.valueStyle, super.key});
 
   @override
   Widget build(BuildContext context) {
