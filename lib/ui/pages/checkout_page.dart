@@ -171,6 +171,78 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         thickness: 1,
                       ),
                       const SizedBox(height: 20),
+
+                      // section: ACCOUNT BALANCE and BUTTON
+                      BlocBuilder<UserBloc, UserState>(
+                        builder: (_, userState) {
+                          return Column(
+                            children: [
+                              TextRowItem(
+                                'Your Wallet',
+                                NumberFormat.currency(
+                                        locale: 'id_ID',
+                                        decimalDigits: 0,
+                                        symbol: 'Rp ')
+                                    .format((userState is UserLoaded)
+                                        ? userState.user.balance
+                                        : 0),
+                                valueStyle: whiteNumberFont.copyWith(
+                                  color: (userState is! UserLoaded)
+                                      ? null
+                                      : (userState.user.balance != null &&
+                                              userState.user.balance! >=
+                                                  totalPrice)
+                                          ? const Color(0xFF3E9D9D)
+                                          : const Color(0xFFFF5C83),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(height: 36),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width -
+                                    (2 * (defaultMargin + 31)),
+                                height: 45,
+                                child: ElevatedButton(
+                                  onPressed: (userState is! UserLoaded)
+                                      ? null
+                                      : (userState.user.balance != null &&
+                                              userState.user.balance! >=
+                                                  totalPrice)
+                                          ? () {}
+                                          : () {},
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 0,
+                                    backgroundColor: (userState is! UserLoaded)
+                                        ? null
+                                        : (userState.user.balance != null &&
+                                                userState.user.balance! >=
+                                                    totalPrice)
+                                            ? const Color(0xFF3E9D9D)
+                                            : mainColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(8)),
+                                  ),
+                                  child: Text(
+                                    (userState is! UserLoaded)
+                                        ? 'null'
+                                        : (userState.user.balance != null &&
+                                                userState.user.balance! >=
+                                                    totalPrice)
+                                            ? 'Checkout Now'
+                                            : 'Top Up My Wallet',
+                                    style: whiteTextFont.copyWith(
+                                      fontSize: 16,
+                                      height: 1.375,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 45),
+                            ],
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
