@@ -110,6 +110,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                   const SizedBox(height: 6),
                                   Text(
                                     widget.ticket.movieDetail.genresAndLanguage,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.clip,
                                     style: greyTextFont.copyWith(fontSize: 12),
                                   ),
                                   const SizedBox(height: 6),
@@ -206,11 +208,19 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                 child: ElevatedButton(
                                   onPressed: (userState is! UserLoaded)
                                       ? null
-                                      : (userState.user.balance != null &&
+                                      : () {
+                                          if (userState.user.balance != null &&
                                               userState.user.balance! >=
-                                                  totalPrice)
-                                          ? () {}
-                                          : () {},
+                                                  totalPrice) {
+                                            // If balance enough
+                                            TicketServices.saveTicket(
+                                                userState.user.id,
+                                                widget.ticket.copyWith(
+                                                    totalPrice: totalPrice));
+                                          } else {
+                                            // If balance not enough
+                                          }
+                                        },
                                   style: ElevatedButton.styleFrom(
                                     elevation: 0,
                                     backgroundColor: (userState is! UserLoaded)
