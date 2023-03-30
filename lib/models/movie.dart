@@ -2,7 +2,8 @@ part of 'models.dart';
 
 class Movie extends Equatable {
   final int id;
-  final String title, overview, posterPath, backdropPath;
+  final String title, overview, posterPath;
+  final String? backdropPath;
   final double voteAverage;
 
   const Movie(
