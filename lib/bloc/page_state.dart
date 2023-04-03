@@ -89,3 +89,13 @@ class OnCheckoutPage extends PageState {
   @override
   List<Object> get props => [ticket];
 }
+
+class OnSuccessPage extends PageState {
+  final Ticket ticket;
+  final UserTransaction transaction;
+
+  const OnSuccessPage(this.ticket, this.transaction);
+
+  @override
+  List<Object> get props => [ticket, transaction];
+}

@@ -22,8 +22,8 @@ class Wrapper extends StatelessWidget {
 
     return BlocBuilder<PageBloc, PageState>(
       builder: (_, pageState) {
-        return (pageState is OnMainPage)
-            ? const MainPage()
+        return (pageState is OnSplashPage)
+            ? const SplashPage()
             : (pageState is OnSignInPage)
                 ? const SignInPage()
                 : (pageState is OnSignUpPage)
@@ -41,7 +41,10 @@ class Wrapper extends StatelessWidget {
                                         ? SelectSeatPage(pageState.ticket)
                                         : (pageState is OnCheckoutPage)
                                             ? CheckoutPage(pageState.ticket)
-                                            : const SplashPage();
+                                            : (pageState is OnSuccessPage)
+                                                ? SuccessPage(pageState.ticket,
+                                                    pageState.transaction)
+                                                : const MainPage();
       },
     );
   }

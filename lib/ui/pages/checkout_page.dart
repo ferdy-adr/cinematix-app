@@ -235,10 +235,22 @@ class _CheckoutPageState extends State<CheckoutPage> {
                                               userState.user.balance! >=
                                                   totalPrice) {
                                             // If balance enough
-                                            TicketServices.saveTicket(
-                                                userState.user.id,
-                                                widget.ticket.copyWith(
-                                                    totalPrice: totalPrice));
+                                            BlocProvider.of<PageBloc>(context)
+                                                .add(GoToSuccessPage(
+                                              widget.ticket.copyWith(
+                                                  totalPrice: totalPrice),
+                                              UserTransaction(
+                                                userID: userState.user.id,
+                                                title: widget
+                                                    .ticket.movieDetail.title,
+                                                subtitle:
+                                                    widget.ticket.theater.name,
+                                                time: DateTime.now(),
+                                                amount: -totalPrice,
+                                                picture: widget.ticket
+                                                    .movieDetail.posterPath,
+                                              ),
+                                            ));
                                           } else {
                                             // If balance not enough
                                           }
