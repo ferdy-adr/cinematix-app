@@ -125,7 +125,8 @@ class _SelectSchedulePageState extends State<SelectSchedulePage> {
                                           .add(GoToSelectSeatPage(
                                         Ticket(
                                           widget.movieDetail,
-                                          bookingCode: '000000000',
+                                          bookingCode: randomAlphaNumeric(12)
+                                              .toUpperCase(),
                                           name: (userState is UserLoaded &&
                                                   userState.user.name != null)
                                               ? userState.user.name!
