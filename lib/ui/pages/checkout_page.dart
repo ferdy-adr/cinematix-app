@@ -177,6 +177,28 @@ class _CheckoutPageState extends State<CheckoutPage> {
                       // section: ACCOUNT BALANCE and BUTTON
                       BlocBuilder<UserBloc, UserState>(
                         builder: (_, userState) {
+                          if (userState is UserLoaded) {
+                            if (userState.user.balance == null ||
+                                userState.user.balance! <= totalPrice) {
+                              Future.delayed(
+                                const Duration(milliseconds: 500),
+                                () => Flushbar(
+                                  flushbarPosition: FlushbarPosition.TOP,
+                                  backgroundColor: const Color(0xFFFF5C83),
+                                  duration: const Duration(seconds: 4),
+                                  messageText: Text(
+                                    'You need to top up your wallet first',
+                                    textAlign: TextAlign.center,
+                                    style: whiteTextFont.copyWith(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ).show(context),
+                              );
+                            }
+                          }
+
                           return Column(
                             children: [
                               TextRowItem(
