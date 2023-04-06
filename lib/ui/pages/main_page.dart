@@ -35,21 +35,12 @@ class _MainPageState extends State<MainPage> {
                     bottomNavBarIndex = value;
                   });
                 },
-                children: [
+                children: const [
                   // Movie Page
-                  const MoviePage(),
+                  MoviePage(),
 
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        await AuthServices.signOut().then(
-                          (_) =>
-                              BlocProvider.of<UserBloc>(context).add(SignOut()),
-                        );
-                      },
-                      child: const Text('Sign Out'),
-                    ),
-                  ),
+                  // Ticket Page
+                  TicketPage(),
                 ],
               ),
             ),
@@ -64,7 +55,12 @@ class _MainPageState extends State<MainPage> {
                 height: 46,
                 margin: const EdgeInsets.only(bottom: 42),
                 child: FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    // Temporary sign out button, under development.
+                    await AuthServices.signOut().then(
+                      (_) => BlocProvider.of<UserBloc>(context).add(SignOut()),
+                    );
+                  },
                   elevation: 0,
                   backgroundColor: accentColor2,
                   child: Icon(
