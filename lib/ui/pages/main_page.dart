@@ -1,7 +1,11 @@
 part of 'pages.dart';
 
+enum MainPageInitialPageView { moviePage, ticketPage }
+
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  final MainPageInitialPageView? initialPageView;
+
+  const MainPage({this.initialPageView, super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -15,7 +19,21 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
 
-    bottomNavBarIndex = 0;
+    if (widget.initialPageView != null) {
+      switch (widget.initialPageView) {
+        case MainPageInitialPageView.moviePage:
+          bottomNavBarIndex = 0;
+          break;
+        case MainPageInitialPageView.ticketPage:
+          bottomNavBarIndex = 1;
+          break;
+        default:
+          bottomNavBarIndex = 0;
+      }
+    } else {
+      bottomNavBarIndex = 0;
+    }
+
     pageController = PageController(initialPage: bottomNavBarIndex);
   }
 

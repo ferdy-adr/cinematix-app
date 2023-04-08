@@ -54,6 +54,11 @@ class OnMainPage extends PageState {
   List<Object> get props => [];
 }
 
+class OnTicketPage extends PageState {
+  @override
+  List<Object> get props => [];
+}
+
 class OnMovieDetailPage extends PageState {
   final Movie movie;
 

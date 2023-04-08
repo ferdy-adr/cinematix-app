@@ -73,6 +73,8 @@ class SuccessPage extends StatelessWidget {
                                 onPressed: () {
                                   if (ticket != null) {
                                     // view My Tickets
+                                    BlocProvider.of<PageBloc>(context)
+                                        .add(GoToTicketPage());
                                   } else {
                                     // view My Wallet
                                   }

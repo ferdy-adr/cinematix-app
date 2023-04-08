@@ -49,6 +49,11 @@ class GoToMainPage extends PageEvent {
   List<Object> get props => [];
 }
 
+class GoToTicketPage extends PageEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class GoToMovieDetailPage extends PageEvent {
   final Movie movie;
 
