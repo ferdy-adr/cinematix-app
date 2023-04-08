@@ -23,34 +23,32 @@ class Wrapper extends StatelessWidget {
 
     return BlocBuilder<PageBloc, PageState>(
       builder: (_, pageState) {
-        return (pageState is OnSplashPage)
-            ? const SplashPage()
-            : (pageState is OnSignInPage)
-                ? const SignInPage()
-                : (pageState is OnSignUpPage)
-                    ? SignUpPage(pageState.registrationData)
-                    : (pageState is OnPreferencePage)
-                        ? PreferencePage(pageState.registrationData)
-                        : (pageState is OnAccountConfirmationPage)
-                            ? AccountConfirmationPage(
-                                pageState.registrationData)
-                            : (pageState is OnMovieDetailPage)
-                                ? MovieDetailPage(pageState.movie)
-                                : (pageState is OnSelectSchedulePage)
-                                    ? SelectSchedulePage(pageState.movieDetail)
-                                    : (pageState is OnSelectSeatPage)
-                                        ? SelectSeatPage(pageState.ticket)
-                                        : (pageState is OnCheckoutPage)
-                                            ? CheckoutPage(pageState.ticket)
-                                            : (pageState is OnSuccessPage)
-                                                ? SuccessPage(pageState.ticket,
-                                                    pageState.transaction)
-                                                : (pageState is OnTicketPage)
-                                                    ? const MainPage(
-                                                        initialPageView:
-                                                            MainPageInitialPageView
-                                                                .ticketPage)
-                                                    : const MainPage();
+        if (pageState is OnSplashPage) {
+          return const SplashPage();
+        } else if (pageState is OnSignInPage) {
+          return const SignInPage();
+        } else if (pageState is OnSignUpPage) {
+          return SignUpPage(pageState.registrationData);
+        } else if (pageState is OnPreferencePage) {
+          return PreferencePage(pageState.registrationData);
+        } else if (pageState is OnAccountConfirmationPage) {
+          return AccountConfirmationPage(pageState.registrationData);
+        } else if (pageState is OnMovieDetailPage) {
+          return MovieDetailPage(pageState.movie);
+        } else if (pageState is OnSelectSchedulePage) {
+          return SelectSchedulePage(pageState.movieDetail);
+        } else if (pageState is OnSelectSeatPage) {
+          return SelectSeatPage(pageState.ticket);
+        } else if (pageState is OnCheckoutPage) {
+          return CheckoutPage(pageState.ticket);
+        } else if (pageState is OnSuccessPage) {
+          return SuccessPage(pageState.ticket, pageState.transaction);
+        } else if (pageState is OnTicketPage) {
+          return const MainPage(
+              initialPageView: MainPageInitialPageView.ticketPage);
+        } else {
+          return const MainPage();
+        }
       },
     );
   }
