@@ -12,3 +12,4 @@ part 'coming_soon_card.dart';
 part 'promo_card.dart';
 part 'cast_crew_card.dart';
 part 'date_card.dart';
+part 'text_row_item.dart';
