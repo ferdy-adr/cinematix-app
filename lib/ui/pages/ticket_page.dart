@@ -160,71 +160,77 @@ class TicketViewer extends StatelessWidget {
         padding:
             const EdgeInsets.fromLTRB(defaultMargin, 130, defaultMargin, 112),
         itemCount: sortedTickets.length,
-        itemBuilder: (_, index) => Container(
-          height: 90,
-          margin: EdgeInsetsDirectional.only(
-              bottom: (index != sortedTickets.length - 1) ? 20 : 0),
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: SizedBox(
-                  width: 70,
-                  child: Image(
-                    fit: BoxFit.cover,
-                    loadingBuilder: (_, child, loadingProgress) {
-                      if (loadingProgress != null &&
-                          loadingProgress.cumulativeBytesLoaded !=
-                              loadingProgress.expectedTotalBytes) {
-                        return SpinKitFadingCircle(
-                          color: mainColor,
-                          size: 30,
-                        );
-                      } else {
-                        return child;
-                      }
-                    },
-                    image: NetworkImage(
-                        '$imageBaseURL/w400${sortedTickets[index].movieDetail.posterPath}'),
+        itemBuilder: (_, index) => GestureDetector(
+          onTap: () {
+            BlocProvider.of<PageBloc>(context)
+                .add(GoToTicketDetailPage(sortedTickets[index]));
+          },
+          child: Container(
+            height: 90,
+            margin: EdgeInsetsDirectional.only(
+                bottom: (index != sortedTickets.length - 1) ? 20 : 0),
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: SizedBox(
+                    width: 70,
+                    child: Image(
+                      fit: BoxFit.cover,
+                      loadingBuilder: (_, child, loadingProgress) {
+                        if (loadingProgress != null &&
+                            loadingProgress.cumulativeBytesLoaded !=
+                                loadingProgress.expectedTotalBytes) {
+                          return SpinKitFadingCircle(
+                            color: mainColor,
+                            size: 30,
+                          );
+                        } else {
+                          return child;
+                        }
+                      },
+                      image: NetworkImage(
+                          '$imageBaseURL/w400${sortedTickets[index].movieDetail.posterPath}'),
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      sortedTickets[index].movieDetail.title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: blackTextFont.copyWith(fontSize: 18),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      sortedTickets[index].movieDetail.genresAndLanguage,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: greyTextFont.copyWith(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        sortedTickets[index].movieDetail.title,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: blackTextFont.copyWith(fontSize: 18),
                       ),
-                    ),
-                    const SizedBox(height: 6),
-                    Text(
-                      sortedTickets[index].theater.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: greyTextFont.copyWith(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
+                      const SizedBox(height: 6),
+                      Text(
+                        sortedTickets[index].movieDetail.genresAndLanguage,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: greyTextFont.copyWith(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 6),
+                      Text(
+                        sortedTickets[index].theater.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: greyTextFont.copyWith(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       );

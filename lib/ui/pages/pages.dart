@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:random_string/random_string.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../bloc/blocs.dart';
 import '../../services/services.dart';
@@ -30,3 +31,4 @@ part 'select_schedule_page.dart';
 part 'select_seat_page.dart';
 part 'checkout_page.dart';
 part 'success_page.dart';
+part 'ticket_detail_page.dart';

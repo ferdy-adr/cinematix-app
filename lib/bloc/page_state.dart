@@ -59,6 +59,15 @@ class OnTicketPage extends PageState {
   List<Object> get props => [];
 }
 
+class OnTicketDetailPage extends PageState {
+  final Ticket ticket;
+
+  const OnTicketDetailPage(this.ticket);
+
+  @override
+  List<Object> get props => [ticket];
+}
+
 class OnMovieDetailPage extends PageState {
   final Movie movie;
 
