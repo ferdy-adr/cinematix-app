@@ -108,3 +108,8 @@ class GoToSuccessPage extends PageEvent {
   @override
   List<Object> get props => [ticket, transaction];
 }
+
+class GoToProfilePage extends PageEvent {
+  @override
+  List<Object> get props => [];
+}

@@ -34,6 +34,8 @@ class PageBloc extends Bloc<PageEvent, PageState> {
         emit(OnCheckoutPage(event.ticket));
       } else if (event is GoToSuccessPage) {
         emit(OnSuccessPage(event.ticket, event.transaction));
+      } else if (event is GoToProfilePage) {
+        emit(OnProfilePage());
       }
     });
   }

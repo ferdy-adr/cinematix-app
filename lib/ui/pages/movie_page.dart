@@ -20,7 +20,7 @@ class MoviePage extends StatelessWidget {
             ),
           ),
           child: BlocBuilder<UserBloc, UserState>(
-            builder: (_, userState) {
+            builder: (context, userState) {
               if (userState is UserLoaded) {
                 if (imageFileToUpload['profilePicture'] != null &&
                     imageFileToUpload['uid'] == userState.user.id) {
@@ -35,26 +35,32 @@ class MoviePage extends StatelessWidget {
 
                 return Row(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(5),
-                      height: 60,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: const Color.fromRGBO(95, 85, 139, 1),
-                          width: 1,
+                    GestureDetector(
+                      onTap: () {
+                        BlocProvider.of<PageBloc>(context)
+                            .add(GoToProfilePage());
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(5),
+                        height: 60,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: const Color.fromRGBO(95, 85, 139, 1),
+                            width: 1,
+                          ),
                         ),
-                      ),
-                      child: CircleAvatar(
-                        backgroundImage: Image(
-                          image: (userState.user.profilePicture == '')
-                              ? const AssetImage('assets/images/user_pic.png')
-                                  as ImageProvider
-                              : NetworkImage(
-                                  userState.user.profilePicture!,
-                                ),
-                          fit: BoxFit.cover,
-                        ).image,
+                        child: CircleAvatar(
+                          backgroundImage: Image(
+                            image: (userState.user.profilePicture == '')
+                                ? const AssetImage('assets/images/user_pic.png')
+                                    as ImageProvider
+                                : NetworkImage(
+                                    userState.user.profilePicture!,
+                                  ),
+                            fit: BoxFit.cover,
+                          ).image,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 16),
