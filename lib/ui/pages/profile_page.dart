@@ -45,34 +45,98 @@ class ProfilePage extends StatelessWidget {
                                   width: 120,
                                   height: 120,
                                   child: CircleAvatar(
-                                    backgroundImage: Image(
+                                    foregroundImage: Image(
                                       fit: BoxFit.cover,
-                                      loadingBuilder:
-                                          (_, child, loadingProgress) {
-                                        if (loadingProgress != null &&
-                                            loadingProgress
-                                                    .cumulativeBytesLoaded !=
-                                                loadingProgress
-                                                    .expectedTotalBytes) {
-                                          return SpinKitFadingCircle(
-                                            color: mainColor,
-                                            size: 50,
-                                          );
-                                        } else {
-                                          return child;
-                                        }
-                                      },
-                                      image: NetworkImage(
-                                          userState is UserLoaded
-                                              ? userState.user.profilePicture!
-                                              : ''),
+                                      image: (userState is UserLoaded &&
+                                              userState.user.profilePicture !=
+                                                  null)
+                                          ? NetworkImage(
+                                              userState.user.profilePicture!)
+                                          : const AssetImage(
+                                                  'assets/images/user_pic.png')
+                                              as ImageProvider,
                                     ).image,
+                                    foregroundColor: Colors.transparent,
+                                    backgroundColor: Colors.transparent,
+                                    child: SpinKitFadingCircle(
+                                      color: mainColor,
+                                      size: 60,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  userState is! UserLoaded
+                                      ? 'null'
+                                      : (userState.user.name ?? 'No Name'),
+                                  style: blackTextFont.copyWith(
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  userState is UserLoaded
+                                      ? userState.user.email
+                                      : 'null',
+                                  style: greyTextFont.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w300,
                                   ),
                                 ),
                               ],
                             ),
                           );
                         },
+                      ),
+                      const SizedBox(height: 30),
+                      Padding(
+                        padding: const EdgeInsets.only(left: defaultMargin),
+                        child: Column(
+                          children: const [
+                            ProfileItemMenu(
+                              imagePath: 'assets/images/edit_profile.png',
+                              title: 'Edit Profile',
+                            ),
+                            SizedBox(height: 16),
+                            ProfileItemMenu(
+                              imagePath: 'assets/images/my_wallet.png',
+                              title: 'My Wallet',
+                            ),
+                            SizedBox(height: 16),
+                            ProfileItemMenu(
+                              imagePath: 'assets/images/language.png',
+                              title: 'Change Language',
+                            ),
+                            SizedBox(height: 16),
+                            ProfileItemMenu(
+                              imagePath: 'assets/images/help_centre.png',
+                              title: 'Help Centre',
+                            ),
+                            SizedBox(height: 16),
+                            ProfileItemMenu(
+                              imagePath: 'assets/images/rate.png',
+                              title: 'Rate Cinematix App',
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 40),
+                      Center(
+                        child: GestureDetector(
+                          onTap: () async {
+                            await AuthServices.signOut().then(
+                              (_) => BlocProvider.of<UserBloc>(context)
+                                  .add(SignOut()),
+                            );
+                          },
+                          child: Text(
+                            'Sign Out',
+                            style: blackTextFont.copyWith(
+                              fontSize: 18,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -82,6 +146,51 @@ class ProfilePage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class ProfileItemMenu extends StatelessWidget {
+  final String imagePath, title;
+  final Function? onTap;
+
+  const ProfileItemMenu(
+      {required this.imagePath, required this.title, this.onTap, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: (onTap == null)
+              ? null
+              : () {
+                  onTap;
+                },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image(
+                width: 24,
+                height: 24,
+                fit: BoxFit.cover,
+                image: AssetImage(imagePath),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                title,
+                style: blackTextFont.copyWith(fontSize: 16),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        const DashLineDivider(
+          height: 1,
+          color: Color(0xFFE4E4E4),
+        ),
+      ],
     );
   }
 }
