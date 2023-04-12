@@ -122,7 +122,7 @@ class TicketDetailPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            const MySeparator(
+                            const DashLineDivider(
                               height: 2,
                               color: Color(0xFFE4E4E4),
                             ),

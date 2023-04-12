@@ -13,3 +13,4 @@ part 'promo_card.dart';
 part 'cast_crew_card.dart';
 part 'date_card.dart';
 part 'text_row_item.dart';
+part 'dash_line_divider.dart';
