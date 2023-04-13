@@ -113,3 +113,8 @@ class GoToProfilePage extends PageEvent {
   @override
   List<Object> get props => [];
 }
+
+class GoToEditProfilePage extends PageEvent {
+  @override
+  List<Object> get props => [];
+}

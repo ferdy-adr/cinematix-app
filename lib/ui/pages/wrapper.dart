@@ -50,6 +50,8 @@ class Wrapper extends StatelessWidget {
           return TicketDetailPage(pageState.ticket);
         } else if (pageState is OnProfilePage) {
           return const ProfilePage();
+        } else if (pageState is OnEditProfilePage) {
+          return const EditProfilePage();
         } else {
           return const MainPage();
         }

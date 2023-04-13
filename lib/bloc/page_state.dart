@@ -118,3 +118,8 @@ class OnProfilePage extends PageState {
   @override
   List<Object> get props => [];
 }
+
+class OnEditProfilePage extends PageState {
+  @override
+  List<Object> get props => [];
+}

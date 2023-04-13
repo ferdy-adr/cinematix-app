@@ -92,28 +92,32 @@ class ProfilePage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: defaultMargin),
                         child: Column(
-                          children: const [
+                          children: [
                             ProfileItemMenu(
                               imagePath: 'assets/images/edit_profile.png',
                               title: 'Edit Profile',
+                              onTap: () {
+                                BlocProvider.of<PageBloc>(context)
+                                    .add(GoToEditProfilePage());
+                              },
                             ),
-                            SizedBox(height: 16),
-                            ProfileItemMenu(
+                            const SizedBox(height: 16),
+                            const ProfileItemMenu(
                               imagePath: 'assets/images/my_wallet.png',
                               title: 'My Wallet',
                             ),
-                            SizedBox(height: 16),
-                            ProfileItemMenu(
+                            const SizedBox(height: 16),
+                            const ProfileItemMenu(
                               imagePath: 'assets/images/language.png',
                               title: 'Change Language',
                             ),
-                            SizedBox(height: 16),
-                            ProfileItemMenu(
+                            const SizedBox(height: 16),
+                            const ProfileItemMenu(
                               imagePath: 'assets/images/help_centre.png',
                               title: 'Help Centre',
                             ),
-                            SizedBox(height: 16),
-                            ProfileItemMenu(
+                            const SizedBox(height: 16),
+                            const ProfileItemMenu(
                               imagePath: 'assets/images/rate.png',
                               title: 'Rate Cinematix App',
                             ),
@@ -165,7 +169,7 @@ class ProfileItemMenu extends StatelessWidget {
           onTap: (onTap == null)
               ? null
               : () {
-                  onTap;
+                  onTap!();
                 },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,

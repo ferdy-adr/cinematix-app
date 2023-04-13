@@ -33,3 +33,4 @@ part 'checkout_page.dart';
 part 'success_page.dart';
 part 'ticket_detail_page.dart';
 part 'profile_page.dart';
+part 'edit_profile_page.dart';
