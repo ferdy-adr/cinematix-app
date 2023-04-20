@@ -52,7 +52,8 @@ class MoviePage extends StatelessWidget {
                         ),
                         child: CircleAvatar(
                           backgroundImage: Image(
-                            image: (userState.user.profilePicture == '')
+                            image: (userState.user.profilePicture == '' ||
+                                    userState.user.profilePicture == null)
                                 ? const AssetImage('assets/images/user_pic.png')
                                     as ImageProvider
                                 : NetworkImage(

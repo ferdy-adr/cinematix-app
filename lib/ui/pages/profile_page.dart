@@ -47,13 +47,18 @@ class ProfilePage extends StatelessWidget {
                                   child: CircleAvatar(
                                     foregroundImage: Image(
                                       fit: BoxFit.cover,
-                                      image: (userState is UserLoaded &&
-                                              userState.user.profilePicture !=
-                                                  null)
-                                          ? NetworkImage(
-                                              userState.user.profilePicture!)
-                                          : const AssetImage(
+                                      image: (userState is! UserLoaded)
+                                          ? const AssetImage(
                                                   'assets/images/user_pic.png')
+                                          : (userState.user.profilePicture ==
+                                                      null ||
+                                                  userState.user
+                                                          .profilePicture ==
+                                                      '')
+                                              ? const AssetImage(
+                                                  'assets/images/user_pic.png')
+                                              : NetworkImage(userState
+                                                      .user.profilePicture!)
                                               as ImageProvider,
                                     ).image,
                                     foregroundColor: Colors.transparent,
