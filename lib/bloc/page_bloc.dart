@@ -37,7 +37,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       } else if (event is GoToProfilePage) {
         emit(OnProfilePage());
       } else if (event is GoToEditProfilePage) {
-        emit(OnEditProfilePage());
+        emit(OnEditProfilePage(event.userAccount));
       }
     });
   }

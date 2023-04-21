@@ -49,7 +49,7 @@ class ProfilePage extends StatelessWidget {
                                       fit: BoxFit.cover,
                                       image: (userState is! UserLoaded)
                                           ? const AssetImage(
-                                                  'assets/images/user_pic.png')
+                                              'assets/images/user_pic.png')
                                           : (userState.user.profilePicture ==
                                                       null ||
                                                   userState.user
@@ -59,7 +59,7 @@ class ProfilePage extends StatelessWidget {
                                                   'assets/images/user_pic.png')
                                               : NetworkImage(userState
                                                       .user.profilePicture!)
-                                              as ImageProvider,
+                                                  as ImageProvider,
                                     ).image,
                                     foregroundColor: Colors.transparent,
                                     backgroundColor: Colors.transparent,
@@ -96,37 +96,43 @@ class ProfilePage extends StatelessWidget {
                       const SizedBox(height: 30),
                       Padding(
                         padding: const EdgeInsets.only(left: defaultMargin),
-                        child: Column(
-                          children: [
-                            ProfileItemMenu(
-                              imagePath: 'assets/images/edit_profile.png',
-                              title: 'Edit Profile',
-                              onTap: () {
-                                BlocProvider.of<PageBloc>(context)
-                                    .add(GoToEditProfilePage());
-                              },
-                            ),
-                            const SizedBox(height: 16),
-                            const ProfileItemMenu(
-                              imagePath: 'assets/images/my_wallet.png',
-                              title: 'My Wallet',
-                            ),
-                            const SizedBox(height: 16),
-                            const ProfileItemMenu(
-                              imagePath: 'assets/images/language.png',
-                              title: 'Change Language',
-                            ),
-                            const SizedBox(height: 16),
-                            const ProfileItemMenu(
-                              imagePath: 'assets/images/help_centre.png',
-                              title: 'Help Centre',
-                            ),
-                            const SizedBox(height: 16),
-                            const ProfileItemMenu(
-                              imagePath: 'assets/images/rate.png',
-                              title: 'Rate Cinematix App',
-                            ),
-                          ],
+                        child: BlocBuilder<UserBloc, UserState>(
+                          builder: (_, userState) {
+                            return Column(
+                              children: [
+                                ProfileItemMenu(
+                                  imagePath: 'assets/images/edit_profile.png',
+                                  title: 'Edit Profile',
+                                  onTap: () {
+                                    if (userState is UserLoaded) {
+                                      BlocProvider.of<PageBloc>(context).add(
+                                          GoToEditProfilePage(userState.user));
+                                    }
+                                  },
+                                ),
+                                const SizedBox(height: 16),
+                                const ProfileItemMenu(
+                                  imagePath: 'assets/images/my_wallet.png',
+                                  title: 'My Wallet',
+                                ),
+                                const SizedBox(height: 16),
+                                const ProfileItemMenu(
+                                  imagePath: 'assets/images/language.png',
+                                  title: 'Change Language',
+                                ),
+                                const SizedBox(height: 16),
+                                const ProfileItemMenu(
+                                  imagePath: 'assets/images/help_centre.png',
+                                  title: 'Help Centre',
+                                ),
+                                const SizedBox(height: 16),
+                                const ProfileItemMenu(
+                                  imagePath: 'assets/images/rate.png',
+                                  title: 'Rate Cinematix App',
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ),
                       const SizedBox(height: 40),

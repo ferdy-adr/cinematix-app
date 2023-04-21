@@ -120,6 +120,10 @@ class OnProfilePage extends PageState {
 }
 
 class OnEditProfilePage extends PageState {
+  final UserAccount userAccount;
+
+  const OnEditProfilePage(this.userAccount);
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [userAccount];
 }

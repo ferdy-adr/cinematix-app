@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:another_flushbar/flushbar.dart';
 import 'package:cinematix/extensions/extensions.dart';
 import 'package:cinematix/models/models.dart';

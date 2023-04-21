@@ -115,6 +115,10 @@ class GoToProfilePage extends PageEvent {
 }
 
 class GoToEditProfilePage extends PageEvent {
+  final UserAccount userAccount;
+
+  const GoToEditProfilePage(this.userAccount);
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [userAccount];
 }

@@ -21,3 +21,8 @@ Future<String> uploadImage(File image) async {
 
   return await snapshot.ref.getDownloadURL();
 }
+
+Future<void> deleteImage(String imageURL) async {
+  Reference reference = FirebaseStorage.instance.refFromURL(imageURL);
+  await reference.delete();
+}

@@ -18,8 +18,10 @@ class LoadUser extends UserEvent {
 
 class UpdateData extends UserEvent {
   final String? name, profilePicture;
+  final bool deleteProfilePicture;
 
-  const UpdateData({this.name, this.profilePicture});
+  const UpdateData(
+      {this.name, this.profilePicture, this.deleteProfilePicture = false});
 
   @override
   List<Object?> get props => [name, profilePicture];

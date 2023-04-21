@@ -13,10 +13,15 @@ class UserAccount extends Equatable {
       this.selectedLanguage,
       this.balance});
 
-  UserAccount copyWith({String? name, String? profilePicture, int? balance}) {
+  UserAccount copyWith(
+      {String? name,
+      String? profilePicture,
+      int? balance,
+      bool deleteProfilePicture = false}) {
     return UserAccount(id, email,
         name: name ?? this.name,
-        profilePicture: profilePicture ?? this.profilePicture,
+        profilePicture: profilePicture ??
+            ((deleteProfilePicture) ? profilePicture : this.profilePicture),
         balance: balance ?? this.balance,
         selectedGenre: selectedGenre,
         selectedLanguage: selectedLanguage);

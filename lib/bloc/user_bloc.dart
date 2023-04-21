@@ -34,9 +34,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           emit(UserInitial());
         }
       } else if (event is UpdateData) {
-        UserAccount updateUser = (state as UserLoaded)
-            .user
-            .copyWith(name: event.name, profilePicture: event.profilePicture);
+        UserAccount updateUser = (state as UserLoaded).user.copyWith(
+            name: event.name,
+            profilePicture: event.profilePicture,
+            deleteProfilePicture: event.deleteProfilePicture);
         await UserAccountServices.updateUser(updateUser);
 
         emit(UserLoaded(updateUser));
