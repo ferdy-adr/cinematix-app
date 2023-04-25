@@ -73,7 +73,10 @@ class _MainPageState extends State<MainPage> {
                 height: 46,
                 margin: const EdgeInsets.only(bottom: 42),
                 child: FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    BlocProvider.of<PageBloc>(context)
+                        .add(GoToTopUpPage(GoToMainPage()));
+                  },
                   elevation: 0,
                   backgroundColor: accentColor2,
                   child: Icon(

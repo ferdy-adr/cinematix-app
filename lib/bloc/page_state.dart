@@ -127,3 +127,12 @@ class OnEditProfilePage extends PageState {
   @override
   List<Object> get props => [userAccount];
 }
+
+class OnTopUpPage extends PageState {
+  final PageEvent pageEvent;
+
+  const OnTopUpPage(this.pageEvent);
+
+  @override
+  List<Object> get props => [pageEvent];
+}
