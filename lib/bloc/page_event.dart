@@ -4,7 +4,7 @@ abstract class PageEvent extends Equatable {
   const PageEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class GoToSplashPage extends PageEvent {
@@ -100,13 +100,13 @@ class GoToCheckoutPage extends PageEvent {
 }
 
 class GoToSuccessPage extends PageEvent {
-  final Ticket ticket;
+  final Ticket? ticket;
   final UserTransaction transaction;
 
   const GoToSuccessPage(this.ticket, this.transaction);
 
   @override
-  List<Object> get props => [ticket, transaction];
+  List<Object?> get props => [ticket, transaction];
 }
 
 class GoToProfilePage extends PageEvent {

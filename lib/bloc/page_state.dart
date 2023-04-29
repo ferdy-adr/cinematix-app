@@ -4,7 +4,7 @@ abstract class PageState extends Equatable {
   const PageState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class PageInitial extends PageState {
@@ -105,13 +105,13 @@ class OnCheckoutPage extends PageState {
 }
 
 class OnSuccessPage extends PageState {
-  final Ticket ticket;
+  final Ticket? ticket;
   final UserTransaction transaction;
 
   const OnSuccessPage(this.ticket, this.transaction);
 
   @override
-  List<Object> get props => [ticket, transaction];
+  List<Object?> get props => [ticket, transaction];
 }
 
 class OnProfilePage extends PageState {
