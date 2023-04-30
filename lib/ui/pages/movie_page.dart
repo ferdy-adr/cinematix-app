@@ -83,15 +83,21 @@ class MoviePage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 4),
-                        Text(
-                          (userState.user.balance != null)
-                              ? NumberFormat.currency(
-                                  locale: 'id_ID',
-                                  decimalDigits: 0,
-                                  symbol: 'IDR ',
-                                ).format(userState.user.balance)
-                              : 'IDR 0',
-                          style: yellowNumberFont.copyWith(fontSize: 14),
+                        GestureDetector(
+                          onTap: () {
+                            BlocProvider.of<PageBloc>(context)
+                                .add(GoToWalletPage(GoToMainPage()));
+                          },
+                          child: Text(
+                            (userState.user.balance != null)
+                                ? NumberFormat.currency(
+                                    locale: 'id_ID',
+                                    decimalDigits: 0,
+                                    symbol: 'IDR ',
+                                  ).format(userState.user.balance)
+                                : 'IDR 0',
+                            style: yellowNumberFont.copyWith(fontSize: 14),
+                          ),
                         ),
                       ],
                     ),

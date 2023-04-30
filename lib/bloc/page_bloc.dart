@@ -40,6 +40,8 @@ class PageBloc extends Bloc<PageEvent, PageState> {
         emit(OnEditProfilePage(event.userAccount));
       } else if (event is GoToTopUpPage) {
         emit(OnTopUpPage(event.pageEvent));
+      } else if (event is GoToWalletPage) {
+        emit(OnWalletPage(event.pageEvent));
       }
     });
   }

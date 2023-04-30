@@ -111,9 +111,13 @@ class ProfilePage extends StatelessWidget {
                                   },
                                 ),
                                 const SizedBox(height: 16),
-                                const ProfileItemMenu(
+                                ProfileItemMenu(
                                   imagePath: 'assets/images/my_wallet.png',
                                   title: 'My Wallet',
+                                  onTap: () {
+                                    BlocProvider.of<PageBloc>(context)
+                                        .add(GoToWalletPage(GoToProfilePage()));
+                                  },
                                 ),
                                 const SizedBox(height: 16),
                                 const ProfileItemMenu(
