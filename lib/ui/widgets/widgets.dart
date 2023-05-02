@@ -16,3 +16,4 @@ part 'date_card.dart';
 part 'text_row_item.dart';
 part 'dash_line_divider.dart';
 part 'money_card.dart';
+part 'transaction_card.dart';

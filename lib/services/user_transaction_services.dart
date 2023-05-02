@@ -27,7 +27,7 @@ class UserTransactionServices {
               subtitle: e['subtitle'],
               time: DateTime.fromMicrosecondsSinceEpoch(e['time']),
               amount: e['amount'],
-              picture: e['picture'],
+              picture: (e['picture'] != '') ? e['picture'] : null,
             ))
         .toList();
   }

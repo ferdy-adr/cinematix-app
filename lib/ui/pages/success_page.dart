@@ -77,6 +77,8 @@ class SuccessPage extends StatelessWidget {
                                         .add(GoToTicketPage());
                                   } else {
                                     // view My Wallet
+                                    BlocProvider.of<PageBloc>(context)
+                                        .add(GoToWalletPage(GoToMainPage()));
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
