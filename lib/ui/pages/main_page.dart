@@ -4,8 +4,9 @@ enum MainPageInitialPageView { moviePage, ticketPage }
 
 class MainPage extends StatefulWidget {
   final MainPageInitialPageView? initialPageView;
+  final bool? isExpiredTickets;
 
-  const MainPage({this.initialPageView, super.key});
+  const MainPage({this.initialPageView, this.isExpiredTickets, super.key});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -14,6 +15,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int bottomNavBarIndex = 0;
   PageController pageController = PageController();
+  bool isExpiredTickets = false;
 
   @override
   void initState() {
@@ -35,6 +37,10 @@ class _MainPageState extends State<MainPage> {
     }
 
     pageController = PageController(initialPage: bottomNavBarIndex);
+
+    if (widget.isExpiredTickets != null) {
+      isExpiredTickets = widget.isExpiredTickets!;
+    }
   }
 
   @override
@@ -51,14 +57,15 @@ class _MainPageState extends State<MainPage> {
                 onPageChanged: (value) {
                   setState(() {
                     bottomNavBarIndex = value;
+                    if (bottomNavBarIndex != 1) isExpiredTickets = false;
                   });
                 },
-                children: const [
+                children: [
                   // Movie Page
-                  MoviePage(),
+                  const MoviePage(),
 
                   // Ticket Page
-                  TicketPage(),
+                  TicketPage(isExpiredTickets: isExpiredTickets),
                 ],
               ),
             ),

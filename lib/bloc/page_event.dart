@@ -50,8 +50,12 @@ class GoToMainPage extends PageEvent {
 }
 
 class GoToTicketPage extends PageEvent {
+  final bool? isExpiredTickets;
+
+  const GoToTicketPage({this.isExpiredTickets});
+
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [isExpiredTickets];
 }
 
 class GoToTicketDetailPage extends PageEvent {

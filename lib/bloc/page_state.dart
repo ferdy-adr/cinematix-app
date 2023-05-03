@@ -55,8 +55,11 @@ class OnMainPage extends PageState {
 }
 
 class OnTicketPage extends PageState {
+  final bool? isExpiredTickets;
+  const OnTicketPage({this.isExpiredTickets});
+
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [isExpiredTickets];
 }
 
 class OnTicketDetailPage extends PageState {
