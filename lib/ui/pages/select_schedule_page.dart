@@ -82,6 +82,7 @@ class _SelectSchedulePageState extends State<SelectSchedulePage> {
                           scrollDirection: Axis.horizontal,
                           padding: const EdgeInsets.symmetric(
                               horizontal: defaultMargin),
+                          physics: const BouncingScrollPhysics(),
                           itemCount: dates.length,
                           itemBuilder: (context, index) => Container(
                             margin: EdgeInsets.only(
@@ -187,6 +188,7 @@ class _SelectSchedulePageState extends State<SelectSchedulePage> {
           height: 50,
           child: ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: defaultMargin),
+            physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: times.length,
             itemBuilder: (_, index) => Container(

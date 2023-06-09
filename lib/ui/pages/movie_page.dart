@@ -134,6 +134,7 @@ class MoviePage extends StatelessWidget {
                   List<Movie> movies = movieState.movies.sublist(0, 10);
 
                   return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemCount: movies.length,
                     padding:
@@ -230,6 +231,7 @@ class MoviePage extends StatelessWidget {
                   List<Movie> movies = movieState.movies.sublist(10);
 
                   return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemCount: movies.length,
                     padding:

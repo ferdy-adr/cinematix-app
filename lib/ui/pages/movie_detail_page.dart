@@ -151,6 +151,7 @@ class MovieDetailPage extends StatelessWidget {
                                       credits = snapshot.data!;
 
                                       return ListView.builder(
+                                        physics: const BouncingScrollPhysics(),
                                         scrollDirection: Axis.horizontal,
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: defaultMargin),

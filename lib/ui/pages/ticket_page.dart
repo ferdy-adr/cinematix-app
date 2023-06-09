@@ -168,7 +168,8 @@ class TicketViewer extends StatelessWidget {
     if (sortedTickets.isNotEmpty) {
       return ListView.builder(
         padding:
-            const EdgeInsets.fromLTRB(defaultMargin, 130, defaultMargin, 112),
+            const EdgeInsets.fromLTRB(defaultMargin, 130, defaultMargin, 130),
+        physics: const BouncingScrollPhysics(),
         itemCount: sortedTickets.length,
         itemBuilder: (_, index) => GestureDetector(
           onTap: () {
