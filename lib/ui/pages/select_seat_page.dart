@@ -132,9 +132,9 @@ class _SelectSeatPageState extends State<SelectSeatPage> {
                       // section: SEATS
                       generateSeats(),
                       const SizedBox(height: 23),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           SeatIndicator(
                             'Available',
                             colorCode: 0xFFE4E4E4,
