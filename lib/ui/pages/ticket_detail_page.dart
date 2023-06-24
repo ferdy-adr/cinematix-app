@@ -9,7 +9,8 @@ class TicketDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        BlocProvider.of<PageBloc>(context).add(GoToTicketPage());
+        BlocProvider.of<PageBloc>(context).add(GoToTicketPage(
+            isExpiredTickets: ticket.time.isBefore(DateTime.now())));
 
         return false;
       },
@@ -38,8 +39,10 @@ class TicketDetailPage extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: GestureDetector(
                               onTap: () {
-                                BlocProvider.of<PageBloc>(context)
-                                    .add(GoToTicketPage());
+                                BlocProvider.of<PageBloc>(context).add(
+                                    GoToTicketPage(
+                                        isExpiredTickets: ticket.time
+                                            .isBefore(DateTime.now())));
                               },
                               child: const Icon(
                                 Icons.arrow_back,
@@ -134,47 +137,49 @@ class TicketDetailPage extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Name',
-                                        style: greyTextFont.copyWith(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Name',
+                                          style: greyTextFont.copyWith(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 2),
-                                      Text(
-                                        ticket.name,
-                                        style: blackTextFont.copyWith(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
+                                        const SizedBox(height: 2),
+                                        Text(
+                                          ticket.name,
+                                          style: blackTextFont.copyWith(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Text(
-                                        'Paid',
-                                        style: greyTextFont.copyWith(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          'Paid',
+                                          style: greyTextFont.copyWith(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 2),
-                                      Text(
-                                        NumberFormat.currency(
-                                          locale: 'id_ID',
-                                          decimalDigits: 0,
-                                          symbol: 'Rp ',
-                                        ).format(ticket.totalPrice),
-                                        style: whiteNumberFont.copyWith(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.black,
+                                        const SizedBox(height: 2),
+                                        Text(
+                                          NumberFormat.currency(
+                                            locale: 'id_ID',
+                                            decimalDigits: 0,
+                                            symbol: 'Rp ',
+                                          ).format(ticket.totalPrice),
+                                          style: whiteNumberFont.copyWith(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.black,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                   QrImage(
                                     data: ticket.bookingCode,
@@ -199,38 +204,15 @@ class TicketDetailPage extends StatelessWidget {
   }
 }
 
-class MySeparator extends StatelessWidget {
-  final double height;
-  final Color color;
+class TicketDetailClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path()..moveTo(0, size.height * 0.75);
+    // path.moveTo(x, y)
 
-  const MySeparator({Key? key, this.height = 1, this.color = Colors.black})
-      : super(key: key);
+    return path;
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        final boxWidth = constraints.constrainWidth();
-        const dashWidth = 8.0;
-        final dashHeight = height;
-        final dashCount = (boxWidth / (1.7 * dashWidth)).floor();
-        return Flex(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          direction: Axis.horizontal,
-          children: List.generate(dashCount, (_) {
-            return SizedBox(
-              width: dashWidth,
-              height: dashHeight,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  color: color,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
-            );
-          }),
-        );
-      },
-    );
-  }
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
